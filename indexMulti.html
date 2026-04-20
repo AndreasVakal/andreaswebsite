@@ -19,60 +19,85 @@
 </script>
 
 <style>
-  /* ── Scattered images layout ── */
-
-  #content-index {
-    /* override the old top-margin approach */
-    margin: 0 !important;
-    position: relative;
-    width: 100%;
-    /* tall enough to hold the scattered images on desktop */
-    min-height: 92vh;
+  /* ── Let wrapper span full width so images can scatter ── */
+  #wrapper {
+    max-width: none !important;
+    padding-top: 0 !important;
   }
 
+  /* ── Header stays narrow and centred, just like before ── */
+  #header {
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top: 24px;
+    text-align: center;
+  }
+
+  /* ── Full-viewport canvas for scattered images ── */
+  #page {
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #content-index {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 80vh;
+    margin: 0 !important;
+  }
+
+  /* ── Each image absolutely placed across the canvas ── */
   .scattered-img {
     position: absolute;
     cursor: pointer;
   }
 
-  /* Individual positions & sizes — tweak percentages to taste */
-  /* Each uses % so they scale with the viewport */
-
+  /* top-left */
   .scattered-img:nth-child(1) {
-    width: clamp(80px, 11vw, 160px);
-    top: 4%;
-    left: 5%;
+    width: clamp(70px, 10vw, 150px);
+    top: 8%;
+    left: 6%;
   }
 
+  /* top-right */
   .scattered-img:nth-child(2) {
     width: clamp(90px, 13vw, 180px);
-    top: 2%;
-    right: 6%;
+    top: 5%;
+    right: 7%;
   }
 
+  /* centre */
   .scattered-img:nth-child(3) {
     width: clamp(100px, 14vw, 200px);
-    top: 38%;
+    top: 40%;
     left: 50%;
-    transform: translateX(-50%); /* centre horizontally */
+    transform: translateX(-50%);
   }
 
+  /* bottom-left */
   .scattered-img:nth-child(4) {
-    width: clamp(75px, 10vw, 140px);
-    bottom: 18%;
-    left: 8%;
+    width: clamp(75px, 10vw, 150px);
+    bottom: 12%;
+    left: 12%;
   }
 
+  /* bottom-right */
   .scattered-img:nth-child(5) {
-    width: clamp(85px, 12vw, 170px);
-    bottom: 10%;
-    right: 5%;
+    width: clamp(85px, 11vw, 165px);
+    bottom: 8%;
+    right: 9%;
   }
 
-  /* ── Mobile: vertical scroll stack ── */
+  /* ── Mobile: drop absolute positioning, stack vertically ── */
   @media (max-width: 700px) {
     #page {
       min-height: unset;
+      position: static;
     }
 
     #content-index {
@@ -81,14 +106,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 28px;
-      padding: 24px 0 40px;
+      gap: 32px;
+      padding: 28px 0 48px;
     }
 
-    .scattered-img {
+    .scattered-img,
+    .scattered-img:nth-child(1),
+    .scattered-img:nth-child(2),
+    .scattered-img:nth-child(3),
+    .scattered-img:nth-child(4),
+    .scattered-img:nth-child(5) {
       position: static !important;
       transform: none !important;
-      width: clamp(120px, 55vw, 260px) !important;
+      width: clamp(130px, 60vw, 280px) !important;
     }
   }
 </style>
@@ -103,49 +133,40 @@
     <br/>Διάβασε περισσότερα για μένα <a href='bio.html'>εδώ</a>.
     <br/><br/><a href='index_en.html'>English</a> | Ελληνικά
   </div>
-  <!-- end #header -->
 
   <div id="page">
     <div id="container">
       <div id="content-index">
 
-        <!-- Image 1 – top left -->
+        <!-- 1: top-left -->
         <img class="scattered-img my_class_4 freezeframe-responsive"
              src="/fotos/flowers.gif"
-             alt="Εικόνα 1"
-             title="Εικόνα 1" />
+             alt="Εικόνα 1" title="Εικόνα 1" />
 
-        <!-- Image 2 – top right -->
+        <!-- 2: top-right -->
         <img class="scattered-img my_class_4 freezeframe-responsive"
              src="/fotos/flowers.gif"
-             alt="Εικόνα 2"
-             title="Εικόνα 2" />
+             alt="Εικόνα 2" title="Εικόνα 2" />
 
-        <!-- Image 3 – centre (the original position) -->
+        <!-- 3: centre -->
         <img class="scattered-img my_class_4 freezeframe-responsive"
              src="/fotos/flowers.gif"
-             alt="Λουλούδια"
-             title="Ένα ποτήρι με λουλούδια και ένα με γάλα" />
+             alt="Λουλούδια" title="Ένα ποτήρι με λουλούδια και ένα με γάλα" />
 
-        <!-- Image 4 – bottom left -->
+        <!-- 4: bottom-left -->
         <img class="scattered-img my_class_4 freezeframe-responsive"
              src="/fotos/flowers.gif"
-             alt="Εικόνα 4"
-             title="Εικόνα 4" />
+             alt="Εικόνα 4" title="Εικόνα 4" />
 
-        <!-- Image 5 – bottom right -->
+        <!-- 5: bottom-right -->
         <img class="scattered-img my_class_4 freezeframe-responsive"
              src="/fotos/flowers.gif"
-             alt="Εικόνα 5"
-             title="Εικόνα 5" />
+             alt="Εικόνα 5" title="Εικόνα 5" />
 
       </div>
-      <!-- end #content -->
     </div>
-    <!-- end #container -->
     <div style="clear: both;">&nbsp;</div>
   </div>
-  <!-- end #page -->
 </div>
 </body>
 </html>
