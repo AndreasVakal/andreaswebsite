@@ -19,95 +19,69 @@
 </script>
 
 <style>
-  /* ── Let wrapper span full width so images can scatter ── */
+  /* Header stays narrow and centred */
   #wrapper {
-    max-width: none !important;
-    padding-top: 0 !important;
-  }
-
-  /* ── Header stays narrow and centred, just like before ── */
-  #header {
     max-width: 400px;
     margin: 0 auto;
-    padding-top: 24px;
-    text-align: center;
+    padding-top: 20px;
   }
 
-  /* ── Full-viewport canvas for scattered images ── */
-  #page {
-    position: relative;
-    width: 100%;
-    min-height: 80vh;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  #content-index {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    min-height: 80vh;
-    margin: 0 !important;
-  }
-
-  /* ── Each image absolutely placed across the canvas ── */
+  /* The scattered images live OUTSIDE #wrapper, fixed to the viewport */
   .scattered-img {
-    position: absolute;
+    position: fixed;
     cursor: pointer;
+    z-index: 0;
   }
 
-  /* top-left */
+  /* 1 – top-left */
   .scattered-img:nth-child(1) {
-    width: clamp(70px, 10vw, 150px);
-    top: 8%;
-    left: 6%;
+    width: clamp(70px, 9vw, 140px);
+    top: 12vh;
+    left: 5vw;
   }
 
-  /* top-right */
+  /* 2 – top-right */
   .scattered-img:nth-child(2) {
-    width: clamp(90px, 13vw, 180px);
-    top: 5%;
-    right: 7%;
+    width: clamp(80px, 11vw, 160px);
+    top: 8vh;
+    right: 6vw;
   }
 
-  /* centre */
+  /* 3 – centre */
   .scattered-img:nth-child(3) {
-    width: clamp(100px, 14vw, 200px);
-    top: 40%;
-    left: 50%;
-    transform: translateX(-50%);
+    width: clamp(100px, 13vw, 180px);
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
   }
 
-  /* bottom-left */
+  /* 4 – bottom-left */
   .scattered-img:nth-child(4) {
-    width: clamp(75px, 10vw, 150px);
-    bottom: 12%;
-    left: 12%;
+    width: clamp(70px, 9vw, 140px);
+    bottom: 14vh;
+    left: 10vw;
   }
 
-  /* bottom-right */
+  /* 5 – bottom-right */
   .scattered-img:nth-child(5) {
-    width: clamp(85px, 11vw, 165px);
-    bottom: 8%;
-    right: 9%;
+    width: clamp(75px, 10vw, 150px);
+    bottom: 10vh;
+    right: 8vw;
   }
 
-  /* ── Mobile: drop absolute positioning, stack vertically ── */
-  @media (max-width: 700px) {
-    #page {
-      min-height: unset;
-      position: static;
-    }
+  /* Make sure header text sits above the images */
+  #wrapper {
+    position: relative;
+    z-index: 1;
+  }
 
-    #content-index {
-      position: static !important;
-      min-height: unset !important;
+  /* ── Mobile (≤700px): switch off fixed, stack vertically ── */
+  @media (max-width: 700px) {
+    /* Stack everything in normal flow */
+    body {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 32px;
-      padding: 28px 0 48px;
     }
 
     .scattered-img,
@@ -118,55 +92,55 @@
     .scattered-img:nth-child(5) {
       position: static !important;
       transform: none !important;
-      width: clamp(130px, 60vw, 280px) !important;
+      width: clamp(130px, 55vw, 260px) !important;
+      margin: 16px 0;
     }
   }
 </style>
 </head>
 <body>
-<div id="wrapper">
-  <div id="header">
-    <h1>Ανδρέας Βακαλιός</h1>
-    <br/>Γεια.
-    <br/>Είμαι σκηνοθέτης, σεναριογράφος και εσωστρεφής.
-    <br/>Λατρεύω τις ταινίες. Λατρεύω και άλλα πράματα.
-    <br/>Διάβασε περισσότερα για μένα <a href='bio.html'>εδώ</a>.
-    <br/><br/><a href='index_en.html'>English</a> | Ελληνικά
-  </div>
 
-  <div id="page">
-    <div id="container">
-      <div id="content-index">
-
-        <!-- 1: top-left -->
-        <img class="scattered-img my_class_4 freezeframe-responsive"
-             src="/fotos/flowers.gif"
-             alt="Εικόνα 1" title="Εικόνα 1" />
-
-        <!-- 2: top-right -->
-        <img class="scattered-img my_class_4 freezeframe-responsive"
-             src="/fotos/flowers.gif"
-             alt="Εικόνα 2" title="Εικόνα 2" />
-
-        <!-- 3: centre -->
-        <img class="scattered-img my_class_4 freezeframe-responsive"
-             src="/fotos/flowers.gif"
-             alt="Λουλούδια" title="Ένα ποτήρι με λουλούδια και ένα με γάλα" />
-
-        <!-- 4: bottom-left -->
-        <img class="scattered-img my_class_4 freezeframe-responsive"
-             src="/fotos/flowers.gif"
-             alt="Εικόνα 4" title="Εικόνα 4" />
-
-        <!-- 5: bottom-right -->
-        <img class="scattered-img my_class_4 freezeframe-responsive"
-             src="/fotos/flowers.gif"
-             alt="Εικόνα 5" title="Εικόνα 5" />
-
-      </div>
+  <!-- Header inside its normal narrow wrapper -->
+  <div id="wrapper">
+    <div id="header">
+      <h1>Ανδρέας Βακαλιός</h1>
+      <br/>Γεια.
+      <br/>Είμαι σκηνοθέτης, σεναριογράφος και εσωστρεφής.
+      <br/>Λατρεύω τις ταινίες. Λατρεύω και άλλα πράματα.
+      <br/>Διάβασε περισσότερα για μένα <a href='bio.html'>εδώ</a>.
+      <br/><br/><a href='index_en.html'>English</a> | Ελληνικά
     </div>
-    <div style="clear: both;">&nbsp;</div>
   </div>
-</div>
+
+  <!--
+    Images are OUTSIDE #wrapper so they are not clipped by its 400px max-width.
+    position:fixed pins them directly to the viewport.
+  -->
+
+  <!-- 1: top-left -->
+  <img class="scattered-img my_class_4 freezeframe-responsive"
+       src="/fotos/flowers.gif"
+       alt="Εικόνα 1" title="Εικόνα 1" />
+
+  <!-- 2: top-right -->
+  <img class="scattered-img my_class_4 freezeframe-responsive"
+       src="/fotos/flowers.gif"
+       alt="Εικόνα 2" title="Εικόνα 2" />
+
+  <!-- 3: centre -->
+  <img class="scattered-img my_class_4 freezeframe-responsive"
+       src="/fotos/flowers.gif"
+       alt="Λουλούδια" title="Ένα ποτήρι με λουλούδια και ένα με γάλα" />
+
+  <!-- 4: bottom-left -->
+  <img class="scattered-img my_class_4 freezeframe-responsive"
+       src="/fotos/flowers.gif"
+       alt="Εικόνα 4" title="Εικόνα 4" />
+
+  <!-- 5: bottom-right -->
+  <img class="scattered-img my_class_4 freezeframe-responsive"
+       src="/fotos/flowers.gif"
+       alt="Εικόνα 5" title="Εικόνα 5" />
+
 </body>
 </html>
