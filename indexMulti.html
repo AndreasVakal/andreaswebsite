@@ -21,20 +21,24 @@
 <style>
 
   /* ─────────────────────────────────────────
-     DESKTOP: images fixed to the viewport
-     Each .img-spot is a fixed-position box.
-     freezeframe expands to fill that box.
+     All .img-spot share one size: 280px.
+     Change this one value to resize all images.
   ───────────────────────────────────────── */
+
+  :root {
+    --img-size: 280px;
+  }
 
   .img-spot {
     position: fixed;
-    overflow: hidden; /* contain freezeframe's wrapper */
+    width: var(--img-size);
+    height: var(--img-size);
+    overflow: hidden;
     z-index: 0;
     cursor: pointer;
   }
 
-  /* freezeframe generates a wrapper div with class .freezeframe-container
-     and an <img> inside. Force both to fill our .img-spot exactly. */
+  /* Force freezeframe's injected markup to stay within the box */
   .img-spot .freezeframe-container,
   .img-spot img {
     width: 100% !important;
@@ -44,24 +48,18 @@
 
   /* 1 – top-left */
   .img-spot.s1 {
-    width: 120px;
-    height: 120px;
-    top: 12vh;
+    top: 10vh;
     left: 5vw;
   }
 
   /* 2 – top-right */
   .img-spot.s2 {
-    width: 140px;
-    height: 140px;
     top: 8vh;
     right: 6vw;
   }
 
   /* 3 – centre */
   .img-spot.s3 {
-    width: 160px;
-    height: 160px;
     top: 50vh;
     left: 50vw;
     transform: translate(-50%, -50%);
@@ -69,35 +67,33 @@
 
   /* 4 – bottom-left */
   .img-spot.s4 {
-    width: 110px;
-    height: 110px;
-    bottom: 14vh;
+    bottom: 10vh;
     left: 10vw;
   }
 
   /* 5 – bottom-right */
   .img-spot.s5 {
-    width: 130px;
-    height: 130px;
-    bottom: 10vh;
+    bottom: 8vh;
     right: 8vw;
   }
 
-  /* Header text stays on top of the images */
+  /* Header text sits above the images */
   #wrapper {
     position: relative;
     z-index: 1;
   }
 
   /* ─────────────────────────────────────────
-     MOBILE (≤700px): switch to vertical scroll
+     MOBILE (≤700px): stack vertically
   ───────────────────────────────────────── */
   @media (max-width: 700px) {
+    :root {
+      --img-size: 220px;
+    }
+
     .img-spot {
       position: static !important;
       transform: none !important;
-      width: 180px !important;
-      height: 180px !important;
       margin: 20px auto;
       display: block;
     }
@@ -107,7 +103,6 @@
 </head>
 <body>
 
-<!-- Header: unchanged from your original -->
 <div id="wrapper">
   <div id="header">
     <h1>Ανδρέας Βακαλιός</h1>
@@ -118,13 +113,6 @@
     <br/><br/><a href='index_en.html'>English</a> | Ελληνικά
   </div>
 </div>
-
-<!--
-  Images sit OUTSIDE #wrapper so the 400px max-width never clips them.
-  Each image is wrapped in a sized .img-spot div.
-  freezeframe.js will inject its markup inside that div,
-  and our CSS forces it to stay within those bounds.
--->
 
 <!-- 1: top-left -->
 <div class="img-spot s1">
